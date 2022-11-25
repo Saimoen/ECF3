@@ -1,1 +1,25 @@
-<p>employee-list works!</p>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Last Name</th>
+        <th>E-mail</th>
+        <th>Job Title</th>
+        <th><button class="btn btn-success"><i class="fa-solid fa-plus"></i>  Add</button></th>
+        <th></th>
+      </tr>
+    </thead>
+    
+    <tbody *ngFor="let information of _employesArray">
+        <tr>
+          <td>{{ information.id }}</td>
+          <td> {{ information.name }}</td>
+          <td>{{ information.last_name }}</td>
+          <td>{{ information.email }}</td>
+          <td>{{ information.job_title }}</td>
+          <td><button class="btn btn-primary" (click)="updateInfo(information.id)"><i class="fas fa-edit"></i> <a routerLink="edit-employee/:id" routerLinkActive="hidden">Edit</a></button></td>
+        <td><button class="btn btn-danger" (click)="deleteItem(information.id)"><i class="fa-solid fa-trash"></i>  Delete</button></td>
+        </tr>
+    </tbody>
+  </table>
