@@ -1,1 +1,7 @@
-<h1>add-employee works!</h1>
+<form #formGroup="ngForm" (ngSubmit)="onSubmit(formGroup.value)">
+    <input type="text" placeholder="Nom" name="name" ngModel><br>
+    <input type="text" placeholder="Last Name" name="last_name"  ngModel><br>
+    <input type="text" placeholder="Job Title" name="job_title" ngModel><br>
+    <input type="email" placeholder="Email" name="email" ngModel><br>
+    <button type="submit">Envoyer</button>
+</form>

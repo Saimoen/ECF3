@@ -5,18 +5,16 @@ import { RequestService } from 'src/app/service/request.service';
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.css']
+  styleUrls: ['./employee-list.component.css'],
 })
 export class EmployeeListComponent implements OnInit {
-
   _employesArray: Employees[] = [];
 
   id: number | undefined;
 
   employee: Employees | undefined;
 
-
-  constructor(private requestService: RequestService) { }
+  constructor(private requestService: RequestService) {}
 
   ngOnInit(): void {
     this.requestService.getAll().subscribe((item: any) => {
@@ -38,16 +36,18 @@ export class EmployeeListComponent implements OnInit {
     );
   }
 
+  refresh(): void {
+    window.location.reload();
+  }
+
   updateInfo(id: any): void {
     this.requestService.update(id, this._employesArray).subscribe(
       (response) => {
         console.log(response);
-
       },
       (error) => {
         console.log(error);
       }
     );
   }
-
 }
