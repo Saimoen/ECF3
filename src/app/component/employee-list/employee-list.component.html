@@ -6,7 +6,7 @@
         <th>Last Name</th>
         <th>E-mail</th>
         <th>Job Title</th>
-        <th><button class="btn btn-success"><i class="fa-solid fa-plus"></i><a routerLink="add-employee" routerLinkActive="active">Add</a>  </button></th>
+        <th><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal1"><i class="fa-solid fa-plus"></i>Add</button></th>
         <th><button class="btn btn-secondary" (click)="refresh()"><i class="fa-solid fa-arrows-rotate"></i>Refresh  </button></th>
       </tr>
     </thead>
@@ -18,8 +18,114 @@
           <td>{{ information.last_name }}</td>
           <td>{{ information.email }}</td>
           <td>{{ information.job_title }}</td>
-          <td><button class="btn btn-primary" (click)="updateInfo(information.id)"><i class="fas fa-edit"></i> <a routerLink="edit-employee/:id" routerLinkActive="active">Edit</a></button></td>
-        <td><button class="btn btn-danger" (click)="deleteItem(information.id)"><i class="fa-solid fa-trash"></i>  Delete</button></td>
+          <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(information)"><i class="fas fa-edit"></i>Edit</button></td>
+        <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fa-solid fa-trash"></i>  Delete</button></td>
         </tr>
     </tbody>
   </table>
+
+  <!-- Modal Update -->
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit an user</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateEmployee()">
+          <div class="form-group">
+            <label for="name">ID</label>
+            <input type="text" disabled #id [(ngModel)]="employeeToUpdate.id" name="id" id="id" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" #name [(ngModel)]="employeeToUpdate.name" name="name" id="name" class="form-control" placeholder="Name">
+          </div>
+      
+          <div class="form-group">
+            <label for="name">Last Name:</label>
+            <input type="text" #last_name [(ngModel)]="employeeToUpdate.last_name" name="last_name" id="last_name" class="form-control" placeholder="Last Name">
+          </div>
+
+          <div class="form-group">
+            <label for="name">Email:</label>
+            <input type="text" #email [(ngModel)]="employeeToUpdate.email" name="email" id="email" class="form-control" placeholder="Email">
+          </div>
+
+          <div class="form-group">
+            <label for="name">Job Title:</label>
+            <input type="text" #job_title [(ngModel)]="employeeToUpdate.job_title" name="job_title" id="name" class="form-control" placeholder="Job Title">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Delete -->
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel2">Do you want to delete this user ?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <p>This user is going to be deleted from the API, please confirm.</p>
+
+    <div class="modal-footer" *ngFor="let information of _employesArray">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-danger" (click)="deleteItem(information.id)">Delete</button>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Add -->
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add an user</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #formGroup="ngForm" (ngSubmit)="onSubmit(formGroup.value)">
+    <div class="form-group">
+      <label for="Name">Name</label>
+      <input type="text" class="form-control" name="name" placeholder="Enter name" ngModel>
+    </div>
+    <div class="form-group">
+      <label for="Last Name">Last Name</label>
+      <input type="text" class="form-control" name="last_name" placeholder="Enter last name" ngModel>
+    </div>
+    <div class="form-group">
+      <label for="Job Title">Job Title</label>
+      <input type="text" class="form-control" name="job_title" placeholder="Enter job title" ngModel>
+    </div>
+    <div class="form-group">
+      <label for="E-Mail">E-mail</label>
+      <input type="email" class="form-control" name="email" placeholder="Enter email" ngModel>
+    </div>
+
+    <!-- <button type="submit" class="btn btn-primary">Add</button>
+    <button type="submit" class="btn btn-success"><a routerLink="/">Back</a></button> -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+  </form>
+      </div>
+    </div>
+  </div>
+</div>

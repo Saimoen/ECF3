@@ -14,6 +14,14 @@ export class EmployeeListComponent implements OnInit {
 
   employee: Employees | undefined;
 
+  employeeToUpdate = {
+    id: '',
+    name: '',
+    last_name: '',
+    email: '',
+    job_title: '',
+  };
+
   constructor(private requestService: RequestService) {}
 
   ngOnInit(): void {
@@ -40,14 +48,24 @@ export class EmployeeListComponent implements OnInit {
     window.location.reload();
   }
 
-  updateInfo(id: any): void {
-    this.requestService.update(id, this._employesArray).subscribe(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+  onSubmit(formGroup: {
+    name: string;
+    last_name: string;
+    job_title: string;
+    email: string;
+  }) {
+    this.requestService
+      .create(formGroup)
+      .subscribe((response) => alert(response.name));
+  }
+
+  edit(employee: any) {
+    this.employeeToUpdate = employee;
+  }
+
+  updateEmployee() {
+    this.requestService
+      .update(this.employeeToUpdate.id, this.employeeToUpdate)
+      .subscribe((response) => console.log(response));
   }
 }
