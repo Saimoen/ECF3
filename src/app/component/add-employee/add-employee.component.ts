@@ -19,6 +19,6 @@ export class AddEmployeeComponent implements OnInit {
   }) {
     this.requestService
       .create(formGroup)
-      .subscribe((response) => console.log(response));
+      .subscribe((response) => alert(response.name));
   }
 }
