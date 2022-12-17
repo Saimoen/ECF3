@@ -22,9 +22,11 @@ export class EmployeeListComponent implements OnInit {
     job_title: '',
   };
 
+  // Service permettant de séparer la logique et les appels HTTP
   constructor(private requestService: RequestService) {}
 
   ngOnInit(): void {
+    // A l'initiation de l'application va chercher la liste d'employée
     this.requestService.getAll().subscribe((item: any) => {
       console.log(item);
       this._employesArray = item;
@@ -47,6 +49,8 @@ export class EmployeeListComponent implements OnInit {
   refresh(): void {
     window.location.reload();
   }
+
+  // en paramètre, on mets les informations qu'on attends
 
   onSubmit(formGroup: {
     name: string;
