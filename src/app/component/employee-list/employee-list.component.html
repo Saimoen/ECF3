@@ -82,8 +82,9 @@
        <p>This user is going to be deleted from the API, please confirm.</p>
 
     <div class="modal-footer" *ngFor="let information of _employesArray">
+      <button class="btn btn-success">{{ information.id }} </button>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-danger" (click)="deleteItem(information.id)">Delete</button>
+      <button type="submit" class="btn btn-danger"   (click)="deleteItem(information.id)">Delete</button>
     </div>
       </div>
     </div>
